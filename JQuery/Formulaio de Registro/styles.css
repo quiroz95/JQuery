@@ -1,0 +1,35 @@
+.container {
+    margin: 20px;
+}
+
+.input-group {
+    margin-bottom: 10px;
+}
+
+#tablaContainer {
+    display: none;
+}
+
+#tablaEstudiantes {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#tablaEstudiantes th, #tablaEstudiantes td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 10px;
+}
+
+#tablaEstudiantes th {
+    background-color: #170cb1;
+    color: white;
+}
+
+.registro-par {
+    background-color: #03608b;
+}
+
+.registro-impar {
+    background-color: #097077;
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registro de Estudiantes</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<h2>Registro de Estudiantes</h2>
+
+<form id="formularioEstudiante">
+    <label for="ci">CI:</label><br>
+    <input type="number" id="ci" name="ci" required><br>
+    <label for="nombre">Nombre:</label><br>
+    <input type="text" id="nombre" name="nombre" required><br>
+    <label for="fecha">Fecha de Nacimiento:</label><br>
+    <input type="date" id="fecha" name="fecha" required><br>
+    <label for="direccion">Dirección:</label><br>
+    <input type="text" id="direccion" name="direccion" required><br><br>
+    <button type="button" id="registrarEstudiante">Registrar Estudiante</button>
+</form>
+
+<table id="tablaEstudiantes">
+    <thead>
+        <tr>
+            <th>CI</th>
+            <th>Nombre</th>
+            <th>Fecha de Nacimiento</th>
+            <th>Dirección</th>
+        </tr>
+    </thead>
+    <tbody id="listaEstudiantes"></tbody>
+</table>
+
+<script>
+$(document).ready(function(){
+    var estudiantes = []; // Array para almacenar los estudiantes
+
+    $('#registrarEstudiante').click(function(){
+        var ci = $('#ci').val();
+        var nombre = $('#nombre').val();
+        var fecha = $('#fecha').val();
+        var direccion = $('#direccion').val();
+
+        // Verificar si el estudiante ya está registrado
+        var estudianteExistente = estudiantes.find(function(estudiante) {
+            return estudiante.ci === ci;
+        });
+
+        if (estudianteExistente) {
+            alert('El estudiante ya está registrado.');
+            return;
+        }
+
+        // Crear un objeto con los datos del estudiante
+        var estudiante = {
+            ci: ci,
+            nombre: nombre,
+            fecha: fecha,
+            direccion: direccion
+        };
+
+        // Agregar el estudiante al array
+        estudiantes.push(estudiante);
+
+        // Limpiar los campos del formulario
+        $('#ci').val('');
+        $('#nombre').val('');
+        $('#fecha').val('');
+        $('#direccion').val('');
+
+        // Mostrar mensaje de registro y mostrar lista de estudiantes
+        console.log("Registro del estudiante:", estudiante);
+        mostrarEstudiantes();
+    });
+
+    function mostrarEstudiantes() {
+        $('#listaEstudiantes').empty();
+        estudiantes.forEach(function(estudiante, index){
+            var claseRegistro = index % 2 === 0 ? 'registro-par' : 'registro-impar';
+            var fila = '<tr class="' + claseRegistro + '">';
+            fila += '<td>' + estudiante.ci + '</td>';
+            fila += '<td>' + estudiante.nombre + '</td>';
+            fila += '<td>' + estudiante.fecha + '</td>';
+            fila += '<td>' + estudiante.direccion + '</td>';
+            fila += '</tr>';
+            $('#listaEstudiantes').append(fila);
+        });
+    }
+});
+</script>
+
+<style>
+#tablaEstudiantes {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#tablaEstudiantes th, #tablaEstudiantes td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 10px;
+}
+
+#tablaEstudiantes th {
+    background-color: #170cb1;
+    color: white;
+}
+
+.registro-par {
+    background-color: #03608b;
+}
+
+.registro-impar {
+    background-color: #097077;
+}
+</style>
+
+</body>
+</html>
